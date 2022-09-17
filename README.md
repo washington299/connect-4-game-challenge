@@ -7,7 +7,7 @@ We have created a very simple Connect 4 game using some of our favorite [front-e
 I solved the logic problem, so now we're able to determine the winner when someone get 4 in a row diagonally, and also did some aditional features like:
 
 - Test the diagonally winner.
-- Change reset modal color when any player wins.
+- Change reset modal color.
 - Create a modal to get players name and the color they want.
 - Create new global state with players info.
 - Show the winner based on his name.
