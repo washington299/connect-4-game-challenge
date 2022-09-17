@@ -11,15 +11,16 @@ import {
   FormControl,
   FormLabel,
   Input,
-  InputGroup,
-  InputLeftElement,
   Text,
   Show,
   Button,
+  Select,
 } from '@chakra-ui/react';
 import { useSetRecoilState } from "recoil";
 
 import { playersInfoState } from "state";
+
+import { colorsList } from 'const';
 
 const PlayersInfoModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,25 +36,13 @@ const PlayersInfoModal = () => {
   const dividerMarginY = { margin: "20px 0" };
   const removeMargin = { margin: 0 };
 
-  const handlePlayer1Fields = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPlayer1Info(previous => ({ ...previous, [e.target.name]: e.target.value }));
-  };
-
-  const handlePlayer2Fields = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPlayer2Info(previous => ({ ...previous, [e.target.name]: e.target.value }));
-  };
-
   const handleClick = () => {
     if (!player1Info.name || !player1Info.color || !player2Info.name || !player2Info.color) {
       setHasError(true);
       return;
     }
-    
-    // add # before color string.
-    const player1Payload = { ...player1Info, color: `#${player1Info.color}` };
-    const player2Payload = { ...player2Info, color: `#${player2Info.color}` };
 
-    setPlayersInfo({ "1": player1Payload, "2": player2Payload });
+    setPlayersInfo({ "1": player1Info, "2": player2Info });
     setIsModalOpen(false);
   };
 
@@ -88,24 +77,22 @@ const PlayersInfoModal = () => {
                     type='text'
                     placeholder="Type a name"
                     value={player1Info.name}
-                    onChange={handlePlayer1Fields}
+                    onChange={(e) => setPlayer1Info(previous => ({ ...previous, name: e.target.value }))}
                   />
                 </FormControl>
 
                 <FormControl isRequired>
-                  <FormLabel htmlFor='player1_color' mb={0}>Color(Hex)</FormLabel>
-                  <InputGroup>
-                    <InputLeftElement pointerEvents="none" color="gray" children="#" />
-                    <Input
-                      id='player1_color'
-                      name="color"
-                      type='text'
-                      placeholder="Type a hexadecimal"
-                      value={player1Info.color}
-                      onChange={handlePlayer1Fields}
-                      maxLength={6}
-                    />
-                  </InputGroup>
+                  <FormLabel htmlFor='player1_color' mb={0}>Color</FormLabel>
+                  <Select
+                    id="player1_color"
+                    placeholder='Choose a color'
+                    name="color"
+                    onChange={(e) => setPlayer1Info((previous) => ({ ...previous, color: e.target.value }))}
+                  >
+                    {colorsList.map(({ label, value }) => (
+                      <option key={label} value={value}>{label}</option>
+                    ))}
+                  </Select>
                 </FormControl>
               </VStack>
             </VStack>
@@ -130,24 +117,22 @@ const PlayersInfoModal = () => {
                     type='text'
                     placeholder="Type a name"
                     value={player2Info.name}
-                    onChange={handlePlayer2Fields}
+                    onChange={(e) => setPlayer2Info(previous => ({ ...previous, name: e.target.value }))}
                   />
                 </FormControl>
 
                 <FormControl isRequired>
                   <FormLabel htmlFor='player2_color' mb={0}>Color(Hex)</FormLabel>
-                  <InputGroup>
-                    <InputLeftElement pointerEvents="none" color="gray" children="#" />
-                    <Input
-                      id='player2_color'
-                      name="color"
-                      type='text'
-                      placeholder="Type a hexadecimal"
-                      value={player2Info.color}
-                      onChange={handlePlayer2Fields}
-                      maxLength={6}
-                    />
-                  </InputGroup>
+                  <Select
+                    id="player2_color"
+                    placeholder='Choose a color'
+                    name="color"
+                    onChange={(e) => setPlayer2Info((previous) => ({ ...previous, color: e.target.value }))}
+                  >
+                    {colorsList.map(({ label, value }) => (
+                      <option key={label} value={value}>{label}</option>
+                    ))}
+                  </Select>
                 </FormControl>
               </VStack>
             </VStack>

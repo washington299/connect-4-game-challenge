@@ -15,14 +15,8 @@ export const playerState = atom<Player>({
 export const playersInfoState = atom<PlayerInfo>({
   key:"playersInfoState",
   default: {
-    1: {
-      name: "Washington",
-      color: "#F0F",
-    } as PlayerInfoTypes,
-    2: {
-      name: "Maria",
-      color: "#0F0",
-    } as PlayerInfoTypes,
+    1: {} as PlayerInfoTypes,
+    2: {} as PlayerInfoTypes,
   }
 })
 
