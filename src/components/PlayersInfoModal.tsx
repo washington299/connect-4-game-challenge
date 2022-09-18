@@ -122,7 +122,7 @@ const PlayersInfoModal = () => {
                 </FormControl>
 
                 <FormControl isRequired>
-                  <FormLabel htmlFor='player2_color' mb={0}>Color(Hex)</FormLabel>
+                  <FormLabel htmlFor='player2_color' mb={0}>Color</FormLabel>
                   <Select
                     id="player2_color"
                     placeholder='Choose a color'
